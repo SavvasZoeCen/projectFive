@@ -97,7 +97,7 @@ def get_algo_keys():
     
     # TODO: Generate or read (using the mnemonic secret) 
     # the algorand public/private keys
-    mnemonic_secret = "YOUR MNEMONIC HERE"
+    mnemonic_secret = "range acoustic motor today bomb crunch fan certain filter permit gain exist clutch oval meadow vast slush burger swallow air garden urban zebra about"
     algo_sk = algosdk.mnemonic.to_private_key(mnemonic_secret)
     algo_pk = algosdk.mnemonic.to_public_key(mnemonic_secret)
     
@@ -109,6 +109,7 @@ def get_eth_keys(filename = "eth_mnemonic.txt"):
     # TODO: Generate or read (using the mnemonic secret) 
     # the ethereum public/private keys
 
+    mnemonic_secret = "clutch oval meadow vast slush burger swallow air garden urban zebra about"
     acct = g.w3.eth.account.from_mnemonic(mnemonic_secret)
     eth_pk = acct._address
     eth_sk = acct._private_key
