@@ -104,13 +104,13 @@ def get_algo_keys():
     return algo_sk, algo_pk
 
 def get_eth_keys(filename = "eth_mnemonic.txt"):
-    #w3 = Web3()
+    w3 = Web3()
     
     # TODO: Generate or read (using the mnemonic secret) 
     # the ethereum public/private keys
 
     mnemonic_secret = "clutch oval meadow vast slush burger swallow air garden urban zebra about"
-    acct = g.w3.eth.account.from_mnemonic(mnemonic_secret)
+    acct = w3.eth.account.from_mnemonic(mnemonic_secret)
     eth_pk = acct._address
     eth_sk = acct._private_key
 
