@@ -104,15 +104,12 @@ def get_algo_keys():
     return algo_sk, algo_pk
 
 def get_eth_keys(filename = "eth_mnemonic.txt"):
-    w3 = Web3()
+    #w3 = Web3()
     
     # TODO: Generate or read (using the mnemonic secret) 
     # the ethereum public/private keys
 
-    w3.eth.account.enable_unaudited_hdwallet_features()
-    acct,mnemonic_secret = w3.eth.account.create_with_mnemonic()
-    
-    acct = w3.eth.account.from_mnemonic(mnemonic_secret)
+    acct = g.w3.eth.account.from_mnemonic(mnemonic_secret)
     eth_pk = acct._address
     eth_sk = acct._private_key
 
@@ -225,8 +222,7 @@ def execute_txes(txes):
         g.session.add(tx)
         g.session.commit()
 
-    w3 = Web3()
-    tx_ids = send_tokens_eth(w3, eth_sk, eth_txes)
+    tx_ids = send_tokens_eth(g.w3, eth_sk, eth_txes)
     for tx in eth_txes:
         t = {'platform': 'Ethereum', 'receiver_pk': tx['receiver_pk'], 'order_id': tx['order_id'], 'tx_id': tx['tx_id']}
         tx = TX(**{f:t[f] for f in t})
