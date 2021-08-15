@@ -98,6 +98,7 @@ def get_algo_keys():
     # TODO: Generate or read (using the mnemonic secret) 
     # the algorand public/private keys
     mnemonic_secret = "range acoustic motor today bomb crunch fan certain filter permit gain exist clutch oval meadow vast slush burger swallow air garden urban zebra about"
+    print("get_algo_keys", mnemonic_secret)
     algo_sk = algosdk.mnemonic.to_private_key(mnemonic_secret)
     algo_pk = algosdk.mnemonic.to_public_key(mnemonic_secret)
     
@@ -236,7 +237,6 @@ def execute_txes(txes):
   
 @app.route('/address', methods=['POST'])
 def address():
-    print("address", request.get_json(silent=True))
     if request.method == "POST":
         content = request.get_json(silent=True)
         if 'platform' not in content.keys():
@@ -248,10 +248,12 @@ def address():
         
         if content['platform'] == "Ethereum":
             #Your code here
+            print("address", "Ethereum")
             eth_sk, eth_pk = get_eth_keys()
             return jsonify( eth_pk )
         if content['platform'] == "Algorand":
             #Your code here
+            print("address", "Algorand")
             algo_sk, algo_pk = get_algo_keys()
             return jsonify( algo_pk )
 
