@@ -12,6 +12,7 @@ from datetime import datetime
 import math
 import sys
 import traceback
+from algosdk.v2client import indexer
 
 # TODO: make sure you implement connect_to_algo, send_tokens_algo, and send_tokens_eth
 from send_tokens import connect_to_algo, connect_to_eth, send_tokens_algo, send_tokens_eth
@@ -304,7 +305,14 @@ def trade():
             # 2. Add the order to the table
             
             # 3a. Check if the order is backed by a transaction equal to the sell_amount (this is new)
-            #???
+            if order.sell_currency == "Ethereum":
+                tx = w3.eth.get_transaction(payload['tx_id'])
+                if tx is None or tx["value"] != order.sell_amount:
+                    return jsonify(False)
+            elif order.sell_currency == "Algorand":
+                tx = indexer.search_transaction(txid=payload['tx_id'])
+                if tx is None or tx.amt != order.sell_amount:
+                    return jsonify(False)
 
             # 3b. Fill the order (as in Exchange Server II) if the order is valid
             txes = []
