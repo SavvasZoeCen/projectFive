@@ -250,11 +250,11 @@ def address():
         
         if content['platform'] == "Ethereum":
             #Your code here
-            eth_pk = 
+            eth_sk, eth_pk = get_eth_keys()
             return jsonify( eth_pk )
         if content['platform'] == "Algorand":
             #Your code here
-            algo_pk = 
+            algo_sk, algo_pk = get_algo_keys()
             return jsonify( algo_pk )
 
 @app.route('/trade', methods=['POST'])
@@ -285,8 +285,6 @@ def trade():
             return jsonify( False )
         
         # Your code here
-        # If all goes well, return jsonify(True). else return jsonify(False)
-        # TODO: Check the signature
         sig = content['sig']
         payload = content['payload']
         payload_pk = payload['sender_pk']
@@ -300,13 +298,13 @@ def trade():
         # 1. Check the signature
         if sig_valid:
             del payload['platform']
-            del payload['pk']
             payload['signature'] = sig
             order = Order(**{f:payload[f] for f in payload})
             
             # 2. Add the order to the table
             
             # 3a. Check if the order is backed by a transaction equal to the sell_amount (this is new)
+            #???
 
             # 3b. Fill the order (as in Exchange Server II) if the order is valid
             txes = []
