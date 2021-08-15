@@ -113,6 +113,7 @@ def get_eth_keys(filename = "eth_mnemonic.txt"):
     acct = w3.eth.account.from_mnemonic(mnemonic_secret)
     eth_pk = acct._address
     eth_sk = acct._private_key
+    print("eth_pk", eth_pk)
 
     return eth_sk, eth_pk
   
