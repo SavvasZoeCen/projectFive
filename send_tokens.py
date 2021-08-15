@@ -54,7 +54,7 @@ def send_tokens_algo(acl, sender_sk, txes):
             
             tx_id = signed_tx.transaction.get_txid()
             tx_ids.append(tx_id)
-            #tx['tx_id'] = tx_id
+            tx['tx_id'] = tx_id
             txconf = acl.send_transaction(signed_tx)
             
             txinfo = wait_for_confirmation_algo(acl, txid=tx_id )
@@ -143,6 +143,6 @@ def send_tokens_eth(w3,sender_sk,txes):
         signed_txn = w3.eth.sign_transaction(tx_dict, sender_sk)
         tx_id = w3.eth.send_raw_transaction(signed_txn.rawTransaction)
         tx_ids.append(tx_id)
-        #tx['tx_id'] = tx_id
+        tx['tx_id'] = tx_id
 
     return tx_ids
