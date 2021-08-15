@@ -249,11 +249,13 @@ def address():
         
         if content['platform'] == "Ethereum":
             #Your code here
+            connect_to_blockchains()
             print("address", "Ethereum")
             eth_sk, eth_pk = get_eth_keys()
             return jsonify( eth_pk )
         if content['platform'] == "Algorand":
             #Your code here
+            connect_to_blockchains()
             print("address", "Algorand")
             algo_sk, algo_pk = get_algo_keys()
             return jsonify( algo_pk )
