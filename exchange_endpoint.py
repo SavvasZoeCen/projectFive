@@ -98,15 +98,15 @@ def get_algo_keys():
     # TODO: Generate or read (using the mnemonic secret) 
     # the algorand public/private keys
     mnemonic_secret = "range acoustic motor today bomb crunch fan certain filter permit gain exist clutch oval meadow vast slush burger swallow air garden urban zebra about"
-    print("get_algo_keys", mnemonic_secret)
     algo_sk = algosdk.mnemonic.to_private_key(mnemonic_secret)
     algo_pk = algosdk.mnemonic.to_public_key(mnemonic_secret)
+    print("get_algo_keys", algo_sk, algo_pk)
     
     return algo_sk, algo_pk
 
 def get_eth_keys(filename = "eth_mnemonic.txt"):
+    print("w3", filename)
     w3 = Web3()
-    print("w3", w3, g.w3)
     
     # TODO: Generate or read (using the mnemonic secret) 
     # the ethereum public/private keys
