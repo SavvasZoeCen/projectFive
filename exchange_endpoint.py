@@ -129,13 +129,14 @@ def fill_order(order, txes=[]):
 	# Note: your fill_order function is *not* required to be recursive, and it is *not* required that it return a list of transactions, 
 	# but executing a group of transactions can be more efficient, and gets around the Ethereum nonce issue described in the instructions
     
-    order.counterparty_id = order.id
     dt = datetime.now()
     order.timestamp = dt
     order.filled = datetime(2222, 2, 2)
     g.session.add(order)
     g.session.commit()
-    #print("fill_order:", order.id, order.buy_currency, order.sell_currency, order.buy_amount, order.sell_amount, order.timestamp)
+    
+    tx = {'amount': order.sell_amount, 'platform': order.sell_currency, 'receiver_pk': order.receiver_pk, 'order_id': order.id, 'tx_id': None} # tx_id to be assigned later when the transaction is executed
+    txes.append(tx)
         
     #2.    Check if there are any existing orders that match. 
     orders = g.session.query(Order).filter(Order.filled == datetime(2222, 2, 2)).all() #Get all unfilled orders
@@ -159,9 +160,6 @@ def fill_order(order, txes=[]):
         g.session.commit()
         #print("order.id:", order.id)
         #print("existing_order.id:", existing_order.id)        
-        
-        tx = {'amount': order.sell_amount, 'receiver_pk': }
-        txes.append(tx)
 
         #– If one of the orders is not completely filled (i.e. the counterparty’s sell_amount is less than buy_amount):
         if existing_order.buy_amount < order.sell_amount: #this order is not completely filled
