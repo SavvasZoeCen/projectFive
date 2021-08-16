@@ -106,7 +106,6 @@ def get_algo_keys():
     return algo_sk, algo_pk
 
 def get_eth_keys(filename = "eth_mnemonic.txt"):
-    print("w3", filename)
     w3 = Web3()
     
     # TODO: Generate or read (using the mnemonic secret) 
@@ -249,15 +248,13 @@ def address():
         
         if content['platform'] == "Ethereum":
             #Your code here
-            connect_to_blockchains()
-            print("address", "Ethereum")
             eth_sk, eth_pk = get_eth_keys()
+            print("Ethereum", eth_pk)
             return jsonify( eth_pk )
         if content['platform'] == "Algorand":
             #Your code here
-            connect_to_blockchains()
-            print("address", "Algorand")
             algo_sk, algo_pk = get_algo_keys()
+            print("Algorand", algo_pk)
             return jsonify( algo_pk )
 
 @app.route('/trade', methods=['POST'])
