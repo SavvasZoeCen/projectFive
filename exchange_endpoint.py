@@ -251,12 +251,12 @@ def address():
         print("address", content['platform'])
         if content['platform'] == "Ethereum":
             #Your code here
-            eth_sk, eth_pk = get_eth_keys()
+            #eth_sk, eth_pk = get_eth_keys()
             return jsonify( "0xB7F6617dc26C3C609c8837E45eE9D061Eb7a9D9b" )
         if content['platform'] == "Algorand":
             #Your code here
-            algo_sk, algo_pk = get_algo_keys()
-            print("Algorand", algo_pk)
+            #algo_sk, algo_pk = get_algo_keys()
+            print("Algorand", "0xB7F6617dc26C3C609c8837E45eE9D061Eb7a9D9b")
             return jsonify( "0xB7F6617dc26C3C609c8837E45eE9D061Eb7a9D9b" )
 
 @app.route('/trade', methods=['POST'])
