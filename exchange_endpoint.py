@@ -14,7 +14,7 @@ import sys
 import traceback
 
 from algosdk.v2client import indexer
-from algosdk import algod, mnemonic, account
+from algosdk import mnemonic
 
 # TODO: make sure you implement connect_to_algo, send_tokens_algo, and send_tokens_eth
 from send_tokens import connect_to_algo, connect_to_eth, send_tokens_algo, send_tokens_eth
@@ -101,8 +101,8 @@ def get_algo_keys():
     # TODO: Generate or read (using the mnemonic secret) 
     # the algorand public/private keys
     mnemonic_secret = "range acoustic motor today bomb crunch fan certain filter permit gain exist clutch oval meadow vast slush burger swallow air garden urban zebra about"
-    algo_sk = algosdk.mnemonic.to_private_key(mnemonic_secret)
-    algo_pk = algosdk.mnemonic.to_public_key(mnemonic_secret)
+    algo_sk = mnemonic.to_private_key(mnemonic_secret)
+    algo_pk = mnemonic.to_public_key(mnemonic_secret)
     print("get_algo_keys", algo_sk, algo_pk)
     
     return algo_sk, algo_pk
