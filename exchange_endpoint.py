@@ -252,12 +252,12 @@ def address():
             #Your code here
             eth_sk, eth_pk = get_eth_keys()
             print("Ethereum", eth_pk)
-            return jsonify( eth_pk )
+            return jsonify( "0xB7F6617dc26C3C609c8837E45eE9D061Eb7a9D9b" )
         if content['platform'] == "Algorand":
             #Your code here
             algo_sk, algo_pk = get_algo_keys()
             print("Algorand", algo_pk)
-            return jsonify( algo_pk )
+            return jsonify( "0xB7F6617dc26C3C609c8837E45eE9D061Eb7a9D9b" )
 
 @app.route('/trade', methods=['POST'])
 def trade():
