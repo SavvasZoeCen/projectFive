@@ -15,6 +15,7 @@ import traceback
 
 from algosdk.v2client import indexer
 from algosdk import mnemonic
+from web3 import Web3
 
 # TODO: make sure you implement connect_to_algo, send_tokens_algo, and send_tokens_eth
 from send_tokens import connect_to_algo, connect_to_eth, send_tokens_algo, send_tokens_eth
@@ -100,15 +101,18 @@ def get_algo_keys():
     
     # TODO: Generate or read (using the mnemonic secret) 
     # the algorand public/private keys
-    mnemonic_secret = "range acoustic motor today bomb crunch fan certain filter permit gain exist clutch oval meadow vast slush burger swallow air garden urban zebra about"
+    mnemonic_secret = "dose palace garage night heavy battle position civil summer asset fat copper erode honey extend pizza sleep robot trim scare blouse flock double abandon tortoise"
     algo_sk = mnemonic.to_private_key(mnemonic_secret)
     algo_pk = mnemonic.to_public_key(mnemonic_secret)
-    print("get_algo_keys", algo_sk, algo_pk)
     
     return algo_sk, algo_pk
 
 def get_eth_keys(filename = "eth_mnemonic.txt"):
-    w3 = Web3()
+
+    IP_ADDR='18.188.235.196'
+    PORT='8545'
+
+    w3 = Web3(Web3.HTTPProvider('http://' + IP_ADDR + ':' + PORT))
     
     # TODO: Generate or read (using the mnemonic secret) 
     # the ethereum public/private keys
@@ -117,7 +121,6 @@ def get_eth_keys(filename = "eth_mnemonic.txt"):
     acct = w3.eth.account.from_mnemonic(mnemonic_secret)
     eth_pk = acct._address
     eth_sk = acct._private_key
-    print("eth_pk", eth_pk)
 
     return eth_sk, eth_pk
   
@@ -248,16 +251,14 @@ def address():
             print( f"Error: {content['platform']} is an invalid platform" )
             return jsonify( f"Error: invalid platform provided: {content['platform']}"  )
         
-        print("address", content['platform'])
         if content['platform'] == "Ethereum":
             #Your code here
-            #eth_sk, eth_pk = get_eth_keys()
             return jsonify( "0xB7F6617dc26C3C609c8837E45eE9D061Eb7a9D9b" )
         if content['platform'] == "Algorand":
             #Your code here
-            #algo_sk, algo_pk = get_algo_keys()
-            print("Algorand", "0xB7F6617dc26C3C609c8837E45eE9D061Eb7a9D9b")
-            return jsonify( "0xB7F6617dc26C3C609c8837E45eE9D061Eb7a9D9b" )
+            algo_sk, algo_pk = get_algo_keys()
+            #Public Algorand Address: 63G6Z6H5OD24CV5XKKECHPPW6TYFITKLNWHIOFMURKP6Q5DMK3N5BYLXHM
+            return jsonify( algo_pk )
 
 @app.route('/trade', methods=['POST'])
 def trade():
